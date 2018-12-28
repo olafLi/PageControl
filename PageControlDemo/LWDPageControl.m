@@ -134,9 +134,11 @@
 }
 
 - (void)setScrollView:(UIScrollView *)scrollView{
+    
     if (_scrollView != scrollView) {
         [_scrollView removeObserver:self forKeyPath:@"contentOffset"];
         _scrollView = scrollView;
+        
         [_scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     }
 }
@@ -172,6 +174,7 @@
         CGFloat offSetX = (newOffset.x - oldOffset.x)*((_indicatorMargin+_indicatorWidth)/scrollViewWidth);
         if (offSetX < 0) {
             //  oldView 新的 宽度增加，新的左侧不动,currentView 旧的 宽度逐渐减小 ,右侧不动 即可
+           
             
             if (oldFrame.size.width-offSetX <= self.currentIndicatorWidth) {
                 oldView.frame = CGRectMake(oldFrame.origin.x, oldFrame.origin.y, oldFrame.size.width-offSetX, oldFrame.size.height);
